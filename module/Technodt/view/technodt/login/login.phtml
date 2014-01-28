@@ -1,0 +1,33 @@
+<?php
+    $title = "Bienvenidos a TechnoDT.com";
+    $this->headTitle($title);
+?>
+
+<div class="hero-unit">
+    <h1><?php echo $this->escapeHtml($title); ?></h1>
+</div>
+
+<div class="row">
+    <div class="span4">
+        
+    </div>
+    <div class="span4">
+        <h3 style="text-align: center;">Iniciar Sesi&oacute;n:</h3>
+        <div style="text-align: right;">
+        <?php
+        
+            $form->setAttribute('action', $this->url.'/Technodt/public/technodt/login/login');
+            $form->prepare();
+            echo $this->form()->openTag($form);
+            echo $this->formRow($form->get('tipo_documento'));
+            echo $this->formRow($form->get('documento'));
+            echo $this->formRow($form->get('password'));
+            echo $this->formSubmit($form->get('submit'));
+            echo $this->form()->closeTag(); 
+        ?>
+        </div>
+    <div class="span4">
+       
+    </div>
+</div>
+

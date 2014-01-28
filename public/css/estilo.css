@@ -1,0 +1,11 @@
+.header {
+    background-color: #ff0000;
+    color: #ffffff;
+}
+.content {
+    background-color: #f2f2f2;
+    color: #346657;
+}
+.footer {
+    font-style: italic;
+}

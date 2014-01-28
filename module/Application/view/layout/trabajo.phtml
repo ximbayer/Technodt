@@ -1,0 +1,17 @@
+<?php $this->doctype(); ?>
+
+<html>
+    <head>
+        <?php echo $this->headMeta()->setCharset('utf8')?>
+        
+        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/estilo.css') ?>
+
+        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/jquery.min.js') ?>
+    </head>
+    <body>
+        <div class="header">Header</div>
+        <div class="content">Mi contenido!</div>
+        <div class="footer">El footer</div>
+        <?php $this->inlineScript();?>
+    </body>
+</html>
