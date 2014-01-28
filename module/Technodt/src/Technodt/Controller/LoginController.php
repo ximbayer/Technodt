@@ -34,7 +34,7 @@ class LoginController extends AbstractActionController
         
          if (!$this->daoUsuarios) {
              $sm = $this->getServiceLocator();
-             $this->daoUsuarios = $sm->get('Technodt\Model\DAOUsuarios');
+             $this->daoUsuarios = $sm->get('Technodt\Model\DAO\DAOUsuarios');
          }
          return $this->daoUsuarios;
      }
