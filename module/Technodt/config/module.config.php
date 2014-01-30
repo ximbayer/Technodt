@@ -1,5 +1,17 @@
 <?php
 return array(
+    //segun docum traducida
+    'di' => array(
+        'instance' => array(
+            'Zend\View\Resolver\TemplatePathStack' => array(
+                'parameters' => array(
+                    'paths'  => array(
+                        'technodt' => __DIR__ . '/../view',
+                    ),
+                ),
+            ),
+        ),
+    ),
     'controllers' => array(
         'invokables' => array(
             'Technodt\Controller\Index' => 'Technodt\Controller\IndexController',
@@ -7,67 +19,41 @@ return array(
             'Technodt\Controller\Usuarios' => 'Technodt\Controller\UsuariosController'
         ),
     ),
-    
     'router' => array(
         'routes' => array(
             'technodt' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/technodt[/][:controller][/:action]',
+                    'route'    => '/technodt[/:action][/:id]',
                     'constraints' => array(
-                        'controller'     => '[a-zA-Z][a-zA-Z0-9_-]+',
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
-                        //'__NAMESPACE__' => 'Technodt\Controller',
                         'controller' => 'Technodt\Controller\Index',
                         'action'     => 'index',
                     ),
                 ),
             ),
-        ),
-    ),
-    
-    /*'router' => array(
-        'routes' => array(
-            'technodt' => array(
-                'type'    => 'Literal',
+            'login' => array(
+                'type'    => 'segment',
                 'options' => array(
-                    // Change this to something specific to your module
-                    'route'    => '/technodt',
-                    'defaults' => array(
-                        // Change this value to reflect the namespace in which
-                        // the controllers for your module are found
-                        '__NAMESPACE__' => 'Technodt\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
+                    'route'    => '/technodt/login[/:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
                     ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    // This route is a sane default when developing a module;
-                    // as you solidify the routes for your module, however,
-                    // you may want to remove it and replace it with more
-                    // specific routes.
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                            ),
-                        ),
+                    'defaults' => array(
+                        'controller' => 'Technodt\Controller\Login',
+                        'action'     => 'login',
                     ),
                 ),
             ),
         ),
-    ),*/
+    ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'Technodt' => __DIR__ . '/../view',
+            'album' => __DIR__ . '/../view',
         ),
     ),
 );

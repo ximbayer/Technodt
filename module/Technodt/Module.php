@@ -1,12 +1,4 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonModule for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Technodt;
 
  use Technodt\Model\DAO\DAOCalificaciones;
@@ -69,7 +61,7 @@ class Module
          return array(
              'factories' => array(
                  'Technodt\Model\DAO\DAOEquiposFantasia' =>  function($sm) {
-                     $tableGateway = $sm->get('EquiposFantasiaTableGateway');
+                     $tableGateway = $sm->get('DAOEquiposFantasiaTableGateway');
                      $table = new DAOEquiposFantasia($tableGateway);
                      return $table;
                  },
@@ -88,7 +80,7 @@ class Module
          return array(
              'factories' => array(
                  'Technodt\Model\DAO\DAOFechasTorneo' =>  function($sm) {
-                     $tableGateway = $sm->get('FechasTorneoTableGateway');
+                     $tableGateway = $sm->get('DAOFechasTorneoTableGateway');
                      $table = new DAOFechasTorneo($tableGateway);
                      return $table;
                  },
@@ -107,7 +99,7 @@ class Module
          return array(
              'factories' => array(
                  'Technodt\Model\DAO\DAOFutbolistas' =>  function($sm) {
-                     $tableGateway = $sm->get('FutbolistasTableGateway');
+                     $tableGateway = $sm->get('DAOFutbolistasTableGateway');
                      $table = new DAOFutbolistas($tableGateway);
                      return $table;
                  },
@@ -126,7 +118,7 @@ class Module
          return array(
              'factories' => array(
                  'Technodt\Model\DAO\DAOLogs' =>  function($sm) {
-                     $tableGateway = $sm->get('LogsTableGateway');
+                     $tableGateway = $sm->get('DAOLogsTableGateway');
                      $table = new DAOLogs($tableGateway);
                      return $table;
                  },
@@ -145,7 +137,7 @@ class Module
          return array(
              'factories' => array(
                  'Technodt\Model\DAO\DAOUsuarios' =>  function($sm) {
-                     $tableGateway = $sm->get('UsuariosTableGateway');
+                     $tableGateway = $sm->get('DAOUsuariosTableGateway');
                      $table = new DAOUsuarios($tableGateway);
                      return $table;
                  },
