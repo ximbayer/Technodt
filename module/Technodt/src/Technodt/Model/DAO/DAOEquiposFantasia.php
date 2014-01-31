@@ -1,5 +1,5 @@
 <?php
-namespace Album\Model\DAO;
+namespace Technodt\Model\DAO;
 
  use Zend\Db\TableGateway\TableGateway; 
 
