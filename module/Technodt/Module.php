@@ -112,7 +112,7 @@ class Module
                  },
 				'Technodt\Model\DAO\DAOUsuarios' =>  function($sm) {
                      $tableGateway = $sm->get('UsuariosTableGateway');
-                     $table = new DAOUsuarios($tableGateway);
+                     $table = new DAOUsuarios($tableGateway); 
                      return $table;
                  },
                  'UsuariosTableGateway' => function ($sm) {

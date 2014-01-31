@@ -34,7 +34,7 @@ class LoginController extends AbstractActionController
         
          if (!$this->daoUsuarios) {
              $sm = $this->getServiceLocator();
-             $this->daoUsuarios = $sm->get('Technodt\Model\DAOUsuarios');
+             $this->daoUsuarios = $sm->get('Technodt\Model\DAO\DAOUsuarios');
          }
          return $this->daoUsuarios;
      }
@@ -54,7 +54,7 @@ class LoginController extends AbstractActionController
             
             if ($form->isValid()){
                 $this->getDAOLogs();
-                //$usuario = $this->getDAOUsuarios()->getUsuarioByDocumento($request->getPost('documento'));
+                $usuario = $this->getDAOUsuarios()->getUsuarioByDocumento($request->getPost('documento'));
                 echo "hola";
                 //$tipoUsuario = $usuario['tipo_usuario_id_tipo_usuario'];
                 switch($tipoUsuario){
