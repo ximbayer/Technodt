@@ -3,7 +3,7 @@ namespace Album\Model\DAO;
 
  use Zend\Db\TableGateway\TableGateway; 
 
- class DAOUsuarios
+ class DAOFechasTorneo
  {
      protected $tableGateway;
 

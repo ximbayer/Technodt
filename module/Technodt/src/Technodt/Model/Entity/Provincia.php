@@ -2,7 +2,7 @@
 
 namespace Technodt\Model\Entity;
 
-class Persona
+class Provincia
  {
      public $idProvincia;
      public $nombre;

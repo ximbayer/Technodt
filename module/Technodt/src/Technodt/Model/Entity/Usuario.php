@@ -2,7 +2,7 @@
 
 namespace Technodt\Model\Entity;
 
-class TipoUsuario
+class Usuario
  {
      public $personaIdPersona;
      public $personaDocumento;
