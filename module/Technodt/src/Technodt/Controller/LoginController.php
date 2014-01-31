@@ -53,10 +53,10 @@ class LoginController extends AbstractActionController
             $form->setData($request->getPost());
             
             if ($form->isValid()){
-                $this->getDAOLogs();
+                $daoLogs = $this->getDAOLogs();
                 $usuario = $this->getDAOUsuarios()->getUsuarioByDocumento($request->getPost('documento'));
-                $tipoUsuario = $usuario['tipo_usuario_id_tipo_usuario'];
-                echo "hola";
+                echo $request->getPost('documento');
+                //$tipoUsuario = $usuario['tipo_usuario_id_tipo_usuario'];
                 switch($tipoUsuario){
                     case 1:
                         return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/participante');
