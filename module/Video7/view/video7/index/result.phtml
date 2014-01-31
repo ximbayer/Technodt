@@ -1,0 +1,13 @@
+<h1><?php echo $this->titulo ?></h1>
+
+<?php
+foreach ($datos as $dato)
+{
+    ?>
+    <li><?php echo $dato['id_usuario'] ?> - <?php echo $dato['nombre']?> - <?php echo $dato['email']?></li>
+    <?php
+}
+    ?>
+
+
+    
