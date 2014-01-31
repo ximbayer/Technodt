@@ -2,7 +2,7 @@
 
 namespace Technodt\Model\Entity;
 
-class Localidad
+class EquipoFantasia
  {
      public $idLocalidad;
      public $nombre;

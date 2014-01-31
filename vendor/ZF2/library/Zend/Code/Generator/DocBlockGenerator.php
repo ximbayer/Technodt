@@ -9,7 +9,7 @@
 
 namespace Zend\Code\Generator;
 
-use Zend\Code\Generator\DocBlock\Tag as DocBlockTag;
+use Zend\Code\Generator\DocBlock\Tag as DockBlockTag;
 use Zend\Code\Reflection\DocBlockReflection;
 
 class DocBlockGenerator extends AbstractGenerator
@@ -56,7 +56,7 @@ class DocBlockGenerator extends AbstractGenerator
         $docBlock->setLongDescription($reflectionDocBlock->getLongDescription());
 
         foreach ($reflectionDocBlock->getTags() as $tag) {
-            $docBlock->setTag(DocBlockTag::fromReflection($tag));
+            $docBlock->setTag(DockBlockTag::fromReflection($tag));
         }
 
         return $docBlock;
@@ -162,15 +162,15 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @param  array|DocBlockTag $tag
+     * @param  array|DockBlockTag $tag
      * @throws Exception\InvalidArgumentException
      * @return DocBlockGenerator
      */
     public function setTag($tag)
     {
         if (is_array($tag)) {
-            $tag = new DocBlockTag($tag);
-        } elseif (!$tag instanceof DocBlockTag) {
+            $tag = new DockBlockTag($tag);
+        } elseif (!$tag instanceof DockBlockTag) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects either an array of method options or an instance of %s\DocBlock\Tag',
                 __METHOD__,
@@ -183,7 +183,7 @@ class DocBlockGenerator extends AbstractGenerator
     }
 
     /**
-     * @return DocBlockTag[]
+     * @return DockBlockTag[]
      */
     public function getTags()
     {

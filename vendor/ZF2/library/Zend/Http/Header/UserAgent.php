@@ -20,7 +20,7 @@ class UserAgent implements HeaderInterface
     {
         $header = new static();
 
-        list($name, $value) = GenericHeader::splitHeaderLine($headerLine);
+        list($name, $value) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (str_replace(array('_', ' ', '.'), '-', strtolower($name)) !== 'user-agent') {

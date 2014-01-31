@@ -32,8 +32,8 @@ class MsgPack extends AbstractAdapter
             );
         }
 
-        if (static::$serialized0 === null) {
-            static::$serialized0 = msgpack_serialize(0);
+        if (self::$serialized0 === null) {
+            self::$serialized0 = msgpack_serialize(0);
         }
 
         parent::__construct($options);
@@ -68,7 +68,7 @@ class MsgPack extends AbstractAdapter
      */
     public function unserialize($serialized)
     {
-        if ($serialized === static::$serialized0) {
+        if ($serialized === self::$serialized0) {
             return 0;
         }
 

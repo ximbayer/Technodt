@@ -75,8 +75,8 @@ abstract class Rand
      */
     public static function getAlternativeGenerator()
     {
-        if (!is_null(static::$generator)) {
-            return static::$generator;
+        if (!is_null(self::$generator)) {
+            return self::$generator;
         }
         if (!class_exists('RandomLib\\Factory')) {
             throw new Exception\RuntimeException(
@@ -90,8 +90,8 @@ abstract class Rand
             'HashTiming',
             'Zend\Math\Source\HashTiming'
         );
-        static::$generator = $factory->getMediumStrengthGenerator();
-        return static::$generator;
+        self::$generator = $factory->getMediumStrengthGenerator();
+        return self::$generator;
     }
 
     /**

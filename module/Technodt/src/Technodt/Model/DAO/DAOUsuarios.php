@@ -1,5 +1,5 @@
 <?php
-namespace Technodt\Model\DAO;
+namespace Album\Model\DAO;
 
  use Zend\Db\TableGateway\TableGateway; 
 
@@ -43,12 +43,12 @@ namespace Technodt\Model\DAO;
      public function saveUsuario(Usuario $usuario)
      {
          $data = array(
-            'persona_id_persona' => $this->personaIdPersona,
-            'persona_documento' => $this->personaDocumento,
-            'persona_tipo_documento_id_tipo_documento' => $this->personaTipoDocumentoIdTipoDocumento,
-            'tipo_usuario_id_tipo_usuario' => $this->tipoUsuarioIdTipoUsuario,
-            'email' => $this->email,
-            'password' => $this->password,
+         'persona_id_persona' => $this->personaIdPersona,
+         'persona_documento' => $this->personaDocumento,
+         'persona_tipo_documento_id_tipo_documento' => $this->personaTipoDocumentoIdTipoDocumento,
+         'tipo_usuario_id_tipo_usuario' => $this->tipoUsuarioIdTipoUsuario,
+         'email' => $this->email,
+         'password' => $this->password,
          );
 
          $id = (int) $usuario->personaIdPersona;

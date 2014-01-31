@@ -111,8 +111,7 @@ class FormCollection extends AbstractHelper
 
                 if (null !== ($translator = $this->getTranslator())) {
                     $label = $translator->translate(
-                        $label,
-                        $this->getTranslatorTextDomain()
+                            $label, $this->getTranslatorTextDomain()
                     );
                 }
 

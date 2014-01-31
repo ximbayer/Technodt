@@ -86,7 +86,6 @@ class Server extends AbstractServer
             $argv = array_slice($argv, 2);
         }
 
-        $class = null;
         if (is_string($function)) {
             $method = Reflection::reflectFunction($function, $argv, $namespace);
         } else {
@@ -107,7 +106,7 @@ class Server extends AbstractServer
             }
         }
 
-        $definition = $this->_buildSignature($method, $class);
+        $definition = $this->_buildSignature($method);
         $this->_addMethodServiceMap($definition);
 
         return $this;

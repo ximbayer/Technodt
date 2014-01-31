@@ -32,6 +32,11 @@ class DecoratorManager extends AbstractPluginManager
     );
 
     /**
+     * @var Renderer\RendererInterface
+     */
+    protected $renderer;
+
+    /**
      * Validate the plugin
      *
      * Checks that the decorator loaded is an instance of Decorator\DecoratorInterface.

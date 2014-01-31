@@ -939,7 +939,7 @@ class Server implements ZendServerServer
                 $this->registerFaultException($row);
             }
 
-        } elseif (is_string($class) && class_exists($class) && (is_subclass_of($class, 'Exception') || 'Exception' === $class)) {
+        } elseif (is_string($class) && class_exists($class) && is_subclass_of($class, 'Exception')) {
             $ref = new ReflectionClass($class);
 
             $this->faultExceptions[] = $ref->getName();

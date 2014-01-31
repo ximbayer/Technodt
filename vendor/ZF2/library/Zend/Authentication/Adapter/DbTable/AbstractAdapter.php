@@ -9,6 +9,7 @@
 
 namespace Zend\Authentication\Adapter\DbTable;
 
+
 use stdClass;
 use Zend\Authentication\Result as AuthenticationResult;
 use Zend\Authentication\Adapter\AbstractAdapter as BaseAdapter;

@@ -68,23 +68,15 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     public function getAnnotations(AnnotationManager $annotationManager)
     {
         $docComment = $this->getDocComment();
-
         if ($docComment == '') {
             return false;
         }
 
-        if ($this->annotations) {
-            return $this->annotations;
+        if (!$this->annotations) {
+            $fileScanner       = new FileScanner($this->getFileName());
+            $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
+            $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
         }
-
-        $fileScanner       = $this->createFileScanner($this->getFileName());
-        $nameInformation   = $fileScanner->getClassNameInformation($this->getName());
-
-        if (!$nameInformation) {
-            return false;
-        }
-
-        $this->annotations = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
 
         return $this->annotations;
     }
@@ -234,20 +226,5 @@ class ClassReflection extends ReflectionClass implements ReflectionInterface
     public function __toString()
     {
         return parent::__toString();
-    }
-
-    /**
-     * Creates a new FileScanner instance.
-     *
-     * By having this as a seperate method it allows the method to be overridden
-     * if a different FileScanner is needed.
-     *
-     * @param  string $filename
-     *
-     * @return FileScanner
-     */
-    protected function createFileScanner($filename)
-    {
-        return new FileScanner($filename);
     }
 }

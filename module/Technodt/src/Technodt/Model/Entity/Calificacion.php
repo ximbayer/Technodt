@@ -1,4 +1,5 @@
 <?php
+
 namespace Technodt\Model\Entity;
 
 class Calificacion

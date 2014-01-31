@@ -1,7 +1,8 @@
 <?php
+
 namespace Technodt\Model\Entity;
 
-class Usuario
+class TipoUsuario
  {
      public $personaIdPersona;
      public $personaDocumento;

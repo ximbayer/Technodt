@@ -23,7 +23,7 @@ class Fieldset extends Element implements FieldsetInterface
     protected $factory;
 
     /**
-     * @var ElementInterface[]
+     * @var array
      */
     protected $byName    = array();
 

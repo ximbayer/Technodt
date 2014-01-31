@@ -3,6 +3,6 @@
 return array(
     'Technodt\Module'                        => __DIR__ . '/Module.php',
     'Technodt\Controller\IndexController' => __DIR__ . '/src/Technodt/Controller/IndexController.php',
-    'Technodt\Framework\TestCase'        => __DIR__ . '/tests/Technodt/Framework/TestCase.php',
-    'Technodt\SampleTest'                => __DIR__ . '/tests/Technodt/SampleTest.php',
+    'ZendSkeletonModuleTest\Framework\TestCase'        => __DIR__ . '/tests/Technodt/Framework/TestCase.php',
+    'ZendSkeletonModuleTest\SampleTest'                => __DIR__ . '/tests/Technodt/SampleTest.php',
 );

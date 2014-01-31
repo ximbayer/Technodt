@@ -13,7 +13,7 @@ class GenericMultiHeader extends GenericHeader implements MultipleHeaderInterfac
 {
     public static function fromString($headerLine)
     {
-        list($fieldName, $fieldValue) = GenericHeader::splitHeaderLine($headerLine);
+        list($fieldName, $fieldValue) = explode(': ', $headerLine, 2);
 
         if (strpos($fieldValue, ',')) {
             $headers = array();

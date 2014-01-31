@@ -139,9 +139,6 @@ class ClassFileLocator extends FilterIterator
                             }
                             $class = (null === $namespace) ? $content : $namespace . '\\' . $content;
                             $file->addClass($class);
-                            if ($namespace) {
-                                $file->addNamespace($namespace);
-                            }
                             $namespace = null;
                             break;
                         }

@@ -16,9 +16,6 @@
         "php": ">=5.3.3",
         "zendframework/zend-stdlib": "self.version"
     },
-    "suggest": {
-        "zendframework/zend-cache":"To support cache feature"
-    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.2-dev",

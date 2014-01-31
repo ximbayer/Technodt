@@ -1,4 +1,12 @@
 <?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/ZendSkeletonModule for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
 namespace Technodt;
 
  use Technodt\Model\DAO\DAOCalificaciones;
@@ -12,9 +20,14 @@ namespace Technodt;
  use Technodt\Model\Entity\FechaTorneo;
  use Technodt\Model\Entity\Futbolista;
  use Technodt\Model\Entity\Usuario;
+ use Technodt\Model\Entity\Log;
  
  use Zend\Db\ResultSet\ResultSet;
  use Zend\Db\TableGateway\TableGateway;
+
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\Mvc\ModuleRouteListener;
+use Zend\Mvc\MvcEvent;
 
 class Module
 {
@@ -26,6 +39,7 @@ class Module
             ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
+		    // if we're in a namespace deeper than one level we need to fix the \ in the path
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
             ),
@@ -36,12 +50,12 @@ class Module
     {
         return include __DIR__ . '/config/module.config.php';
     }
-    
-    public function getCalificacionesServiceConfig()
+     
+     public function getServiceConfig()
      {
          return array(
              'factories' => array(
-                 'Technodt\Model\DAO\DAOCalificaciones' =>  function($sm) {
+				'Technodt\Model\DAO\DAOCalificaciones' =>  function($sm) {
                      $tableGateway = $sm->get('CalificacionesTableGateway');
                      $table = new DAOCalificaciones($tableGateway);
                      return $table;
@@ -52,16 +66,8 @@ class Module
                      $resultSetPrototype->setArrayObjectPrototype(new Calificacion());
                      return new TableGateway('calificacion', $dbAdapter, null, $resultSetPrototype);
                  },
-             ),
-         );
-     }
-     
-     public function getEquiposFantasiaServiceConfig()
-     {
-         return array(
-             'factories' => array(
-                 'Technodt\Model\DAO\DAOEquiposFantasia' =>  function($sm) {
-                     $tableGateway = $sm->get('DAOEquiposFantasiaTableGateway');
+				 'Technodt\Model\DAO\DAOEquiposFantasia' =>  function($sm) {
+                     $tableGateway = $sm->get('EquiposFantasiaTableGateway');
                      $table = new DAOEquiposFantasia($tableGateway);
                      return $table;
                  },
@@ -71,16 +77,8 @@ class Module
                      $resultSetPrototype->setArrayObjectPrototype(new EquipoFantasia());
                      return new TableGateway('equipo_fantasia', $dbAdapter, null, $resultSetPrototype);
                  },
-             ),
-         );
-     }
-     
-      public function getFechasTorneoServiceConfig()
-     {
-         return array(
-             'factories' => array(
-                 'Technodt\Model\DAO\DAOFechasTorneo' =>  function($sm) {
-                     $tableGateway = $sm->get('DAOFechasTorneoTableGateway');
+				 'Technodt\Model\DAO\DAOFechasTorneo' =>  function($sm) {
+                     $tableGateway = $sm->get('FechasTorneoTableGateway');
                      $table = new DAOFechasTorneo($tableGateway);
                      return $table;
                  },
@@ -90,16 +88,8 @@ class Module
                      $resultSetPrototype->setArrayObjectPrototype(new FechaTorneo());
                      return new TableGateway('fecha_torneo', $dbAdapter, null, $resultSetPrototype);
                  },
-             ),
-         );
-     }
-     
-     public function getFutbolistasServiceConfig()
-     {
-         return array(
-             'factories' => array(
-                 'Technodt\Model\DAO\DAOFutbolistas' =>  function($sm) {
-                     $tableGateway = $sm->get('DAOFutbolistasTableGateway');
+				 'Technodt\Model\DAO\DAOFutbolistas' =>  function($sm) {
+                     $tableGateway = $sm->get('FutbolistasTableGateway');
                      $table = new DAOFutbolistas($tableGateway);
                      return $table;
                  },
@@ -109,16 +99,8 @@ class Module
                      $resultSetPrototype->setArrayObjectPrototype(new FechaTorneo());
                      return new TableGateway('futbolista', $dbAdapter, null, $resultSetPrototype);
                  },
-             ),
-         );
-     }
-     
-     public function getLogsServiceConfig()
-     {
-         return array(
-             'factories' => array(
                  'Technodt\Model\DAO\DAOLogs' =>  function($sm) {
-                     $tableGateway = $sm->get('DAOLogsTableGateway');
+                     $tableGateway = $sm->get('LogsTableGateway');
                      $table = new DAOLogs($tableGateway);
                      return $table;
                  },
@@ -128,16 +110,8 @@ class Module
                      $resultSetPrototype->setArrayObjectPrototype(new Log());
                      return new TableGateway('log', $dbAdapter, null, $resultSetPrototype);
                  },
-             ),
-         );
-     }
-     
-     public function getUsuariosServiceConfig()
-     {
-         return array(
-             'factories' => array(
-                 'Technodt\Model\DAO\DAOUsuarios' =>  function($sm) {
-                     $tableGateway = $sm->get('DAOUsuariosTableGateway');
+				'Technodt\Model\DAO\DAOUsuarios' =>  function($sm) {
+                     $tableGateway = $sm->get('UsuariosTableGateway');
                      $table = new DAOUsuarios($tableGateway);
                      return $table;
                  },
@@ -146,7 +120,7 @@ class Module
                      $resultSetPrototype = new ResultSet();
                      $resultSetPrototype->setArrayObjectPrototype(new Usuario());
                      return new TableGateway('usuario', $dbAdapter, null, $resultSetPrototype);
-                 },
+                 }, 
              ),
          );
      }

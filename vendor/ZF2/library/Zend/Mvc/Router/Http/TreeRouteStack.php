@@ -223,7 +223,7 @@ class TreeRouteStack extends SimpleRouteStack
      * Get a prototype.
      *
      * @param  string $name
-     * @return RouteInterface|null
+     * @return RouterInterface|null
      */
     public function getPrototype($name)
     {

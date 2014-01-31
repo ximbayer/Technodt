@@ -35,7 +35,7 @@ class RetryAfter extends AbstractDate
     {
         $dateHeader = new static();
 
-        list($name, $date) = GenericHeader::splitHeaderLine($headerLine);
+        list($name, $date) = explode(': ', $headerLine, 2);
 
         // check to ensure proper header type for this factory
         if (strtolower($name) !== strtolower($dateHeader->getFieldName())) {

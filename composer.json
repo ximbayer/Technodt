@@ -6,9 +6,6 @@
         "framework",
         "zf2"
     ],
-    "autoload": {
-     "psr-0": { "Technodt": "module/Technodt/src/" }
-    },
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.3.3",

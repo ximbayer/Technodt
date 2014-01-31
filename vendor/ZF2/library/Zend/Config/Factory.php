@@ -142,8 +142,8 @@ class Factory
             );
         }
 
-        $extension = substr(strrchr($filename, '.'), 1);
-        $directory = dirname($filename);
+        $extension          = substr(strrchr($filename, '.'), 1);
+        $directory          = dirname($filename);
 
         if (!is_dir($directory)) {
             throw new Exception\RuntimeException(
@@ -157,16 +157,16 @@ class Factory
             );
         }
 
-        if (!isset(static::$writerExtensions[$extension])) {
+        if (!isset(self::$writerExtensions[$extension])) {
             throw new Exception\RuntimeException(
                 "Unsupported config file extension: '.{$extension}' for writing."
             );
         }
 
-        $writer = static::$writerExtensions[$extension];
+        $writer = self::$writerExtensions[$extension];
         if (($writer instanceOf Writer\AbstractWriter) === false) {
             $writer = self::getWriterPluginManager()->get($writer);
-            static::$writerExtensions[$extension] = $writer;
+            self::$writerExtensions[$extension] = $writer;
         }
 
         if (is_object($config)) {
@@ -210,7 +210,7 @@ class Factory
      */
     public static function setWriterPluginManager(WriterPluginManager $writers)
     {
-        static::$writers = $writers;
+        self::$writers = $writers;
     }
 
     /**
@@ -272,6 +272,6 @@ class Factory
             ));
         }
 
-        static::$writerExtensions[$extension] = $writer;
+        self::$writerExtensions[$extension] = $writer;
     }
 }

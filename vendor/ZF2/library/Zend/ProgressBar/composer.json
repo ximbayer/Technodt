@@ -17,8 +17,7 @@
         "zendframework/zend-stdlib": "self.version"
     },
     "suggest": {
-        "zendframework/zend-json": "Zend\\Json component",
-        "zendframework/zend-session": "To support progressbar persistent"
+        "zendframework/zend-json": "Zend\\Json component"
     },
     "extra": {
         "branch-alias": {

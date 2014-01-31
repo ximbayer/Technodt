@@ -507,7 +507,7 @@ abstract class AbstractRestfulController extends AbstractController
      * $this->getIdentifier($routeMatch, $request)",
      * passing the appropriate objects.
      *
-     * To retrieve the body content data, use "$data = $this->processBodyContent($request)";
+     * To retrive the body content data, use "$data = $this->processBodyContent($request)";
      * that method will return a string, array, or, in the case of JSON, an object.
      *
      * @param  string $method

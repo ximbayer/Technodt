@@ -23,15 +23,17 @@ use Zend\Session\Container;
  * <code>
  * return array(
  *     'session_containers' => array(
- *         'SessionContainer\sample',
- *         'my_sample_session_container',
- *         'MySessionContainer',
+ *         'auth',
+ *         'user',
+ *         'captcha',
  *     ),
  * );
  * </code>
  *
+ * Services use the prefix "SessionContainer\\":
+ *
  * <code>
- * $container = $services->get('MySessionContainer');
+ * $container = $services->get('SessionContainer\captcha');
  * </code>
  */
 class ContainerAbstractServiceFactory implements AbstractFactoryInterface
@@ -136,6 +138,8 @@ class ContainerAbstractServiceFactory implements AbstractFactoryInterface
 
     /**
      * Normalize the container name in order to perform a lookup
+     *
+     * Strips off the "SessionContainer\" prefix, and lowercases the name.
      *
      * @param  string $name
      * @return string

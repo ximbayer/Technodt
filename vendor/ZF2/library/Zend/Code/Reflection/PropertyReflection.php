@@ -77,13 +77,8 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
         }
 
         $class              = $this->getDeclaringClass();
-        $cachingFileScanner = $this->createFileScanner($class->getFileName());
+        $cachingFileScanner = new CachingFileScanner($class->getFileName());
         $nameInformation    = $cachingFileScanner->getClassNameInformation($class->getName());
-
-        if (!$nameInformation) {
-            return false;
-        }
-
         $this->annotations  = new AnnotationScanner($annotationManager, $docComment, $nameInformation);
 
         return $this->annotations;
@@ -92,20 +87,5 @@ class PropertyReflection extends PhpReflectionProperty implements ReflectionInte
     public function toString()
     {
         return $this->__toString();
-    }
-
-    /**
-     * Creates a new FileScanner instance.
-     *
-     * By having this as a seperate method it allows the method to be overridden
-     * if a different FileScanner is needed.
-     *
-     * @param  string $filename
-     *
-     * @return FileScanner
-     */
-    protected function createFileScanner($filename)
-    {
-        return new CachingFileScanner($filename);
     }
 }
