@@ -28,7 +28,7 @@ class EquipoFantasiaForm extends Form
             ),
             'attributes' => array(
                 'type' => 'text',
-                'class' => 'output'
+                'class' => 'input'
             ),
         ));
         
@@ -87,7 +87,49 @@ class EquipoFantasiaForm extends Form
             'attributes' => array(
                 'value' => 'Cancelar',
                 'title' => 'Cancelar',
-                'type' => 'Submit'
+                'type' => 'button'
+            ),
+        ));
+        
+        //boton para realizar los cambios
+        
+        $this->add(array(
+            'name' => 'cambios',
+            'attributes' => array(
+                'value' => 'Realizar Cambios',  //aca podemos no poner nada y poner una foto con alguna flecha circular
+                'title' => 'Cambios',
+                'type' => 'button'
+            ),
+        ));
+        
+        //ingresar y eliminar jugadores del equipo
+        //no se si van aca, o directamente al HTML para agregarle una imagen
+        $this->add(array(
+            'name' => 'ingresar',
+            'attributes' => array(
+                'value' => 'Ingresar',  //aca podemos no poner nada y poner una foto con alguna flecha
+                'title' => 'Ingresar',
+                'type' => 'button'
+            ),
+        ));
+        
+        $this->add(array(
+            'name' => 'eliminar',
+            'attributes' => array(
+                'value' => 'Eliminar',  //aca podemos no poner nada y poner una foto con alguna flecha
+                'title' => 'Eliminar',
+                'type' => 'button'
+            ),
+        ));
+        
+        //desloguearse
+        
+        $this->add(array(
+            'name' => 'deslog',
+            'attributes' => array(
+                'value' => 'Desloquearse',  //podriamos poner una foto de un boton de power
+                'title' => 'Desloquearse',
+                'type' => 'button'
             ),
         ));
         

@@ -49,61 +49,53 @@ class LoginController extends AbstractActionController
         if ($request->isPost())
         {
             $log = new Log();
+			$daoLogs = $this->getDAOLogs();
+			$daoUsaurios = $this->getDAOUsuarios();
             $form->setInputFilter($log->getInputFilter());
             $form->setData($request->getPost());
-            
+            $documento = $request->getPost('documento');
+			$usuario = $daoUsaurios ->getUsuarioByDocumento($documento);
             if ($form->isValid()){
-                $daoLogs = $this->getDAOLogs();
-                $usuario = $this->getDAOUsuarios()->getUsuarioByDocumento($request->getPost('documento'));
-                echo $request->getPost('documento');
-                //$tipoUsuario = $usuario['tipo_usuario_id_tipo_usuario'];
-                switch($tipoUsuario){
+				$tipoDocumento = $request->getPost('tipo_documento');
+				$password = $request->getPost('password');
+				$tipoUsuario =$usuario->tipoUsuarioIdTipoUsuario;
+				
+				$log = new Log();
+				$log->fecha = date("d/m/y");
+				$log->hora	= date("H:i:s");
+				$log->tipoLogIdTipoLog = 1;
+				$log->usuarioPersonaIdPersona = $usuario->personaIdPersona;
+				$log->usuarioPersonaDocumento = $usuario->personaDocumento;
+				$log->usuarioPersonaTipoDocumentoIdTipoDocumento = $usuario->personaTipoDocumentoIdTipoDocumento;
+				$log->usuarioTipoUsuarioIdTipoUsuario = $usuario->tipoUsuarioIdTipoUsuario;
+				
+				//insertar el log en la bd:
+				
+				if( ($usuario->personaDocumento ==$documento) && 
+					($usuario->personaTipoDocumentoIdTipoDocumento == $tipoDocumento) &&
+					($usuario->password == $password))
+					{
+					
+					switch($tipoUsuario){
                     case 1:
-                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/participante');
-                        break;
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/participante/'.$usuario->personaIdPersona);
+						break;
                     case 2:
-                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/periodista');
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/periodista/'.$usuario->personaIdPersona); 
                         break;
                     case 3:
-                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/administrador');
+                        return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/administrador/'.$usuario->personaIdPersona); 
                         break;
-                }
-            }
-            
-            
+					}
+					
+				}
+				else {
+						echo "<h5 style='color:#fff; background-color:red;'>El tipo de Usuario o Documento o Contrase&ntilde;a NO son correctas. Intente nuevamente.</h5>";
+				}
+			}
         } 
-        return array('form' => $form);
-    }
-    
-    public function verAction()
-    {
-        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $u = new Usuarios($this->dbAdapter);
-        $id= (int) $this->params()->fromRoute('id',0);
-        $valores = array(
-            'titulo' => 'Detalles del Usuario:',
-            'datos'  => $u->getUsuarioById($id),
-        );
-        
-        return new ViewModel($valores);
-    }
-    
-    public function addAction()
-    {
-        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $u = new Usuarios($this->dbAdapter);
-        $data = array(
-            'nombre'=> 'Sebastian Albino',
-            'email' => 'sebito@outlook.com',
-        );
-        $u->updateUsuarioAction(0,$data['nombre'],$data['email']);
-        $valores = array(
-            'titulo' => 'Agregar Usuario:',
-            'datos'  => $u->fetchAll(),
-        );
-        
-        return new ViewModel($valores);
-    }
+		return new ViewModel(array('form' => $form));
+	}
 
         public function fooAction()
     {
@@ -112,19 +104,4 @@ class LoginController extends AbstractActionController
         return array();
     }
     
-    public function modelAction() 
-    {
-        $n = new Modelo();
-        $t = $n->getTexto();
-        return new ViewModel(array('texto'=>$t));
-    }
-    
-    public function resultAction()
-    {   
-        $this->dbAdapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
-        $result = $this->dbAdapter->query("select * from Usuario order by id_usuario desc", Adapter::QUERY_MODE_EXECUTE);
-        $datos = $result->toArray();
-        //var_dump($this->dbAdapter);
-        return new ViewModel(array('titulo'=>'Conectarse a MySQL utilizando ResultSet','datos'=>$datos));
-    }
 }

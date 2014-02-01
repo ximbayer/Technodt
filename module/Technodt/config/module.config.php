@@ -13,10 +13,11 @@ return array(
             'technodt' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/technodt[/][:controller][/:action]',
+                    'route'    => '/technodt[/][:controller][/:action][/:id]',
                     'constraints' => array(
                         'controller'     => '[a-zA-Z][a-zA-Z0-9_-]+',
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'id'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Technodt\Controller',

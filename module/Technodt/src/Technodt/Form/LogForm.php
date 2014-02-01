@@ -16,9 +16,9 @@ class LogForm extends Form
             'options' => array(
                 'label' => 'Tipo de Documento:',
                 'value_options' => array(
-                    '0' => 'DNI',
-                    '1' => 'LE',
-                    '2' => 'LC',
+                    '1' => 'DNI',
+                    '2' => 'LE',
+                    '3' => 'LC',
                 ),
             ),
         ));
