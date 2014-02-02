@@ -48,7 +48,7 @@ class LoginController extends AbstractActionController
         
         if ($request->isPost())
         {
-            $log = new Log();
+			$log = new Log();
 			$daoLogs = $this->getDAOLogs();
 			$daoUsaurios = $this->getDAOUsuarios();
             $form->setInputFilter($log->getInputFilter());
@@ -60,22 +60,19 @@ class LoginController extends AbstractActionController
 				$password = $request->getPost('password');
 				$tipoUsuario =$usuario->tipoUsuarioIdTipoUsuario;
 				
-				$log = new Log();
-				$log->fecha = date("d/m/y");
-				$log->hora	= date("H:i:s");
-				$log->tipoLogIdTipoLog = 1;
-				$log->usuarioPersonaIdPersona = $usuario->personaIdPersona;
-				$log->usuarioPersonaDocumento = $usuario->personaDocumento;
-				$log->usuarioPersonaTipoDocumentoIdTipoDocumento = $usuario->personaTipoDocumentoIdTipoDocumento;
-				$log->usuarioTipoUsuarioIdTipoUsuario = $usuario->tipoUsuarioIdTipoUsuario;
-				
-				//insertar el log en la bd:
-				
 				if( ($usuario->personaDocumento ==$documento) && 
 					($usuario->personaTipoDocumentoIdTipoDocumento == $tipoDocumento) &&
 					($usuario->password == $password))
 					{
-					
+					$log->fecha = date("d/m/y");
+					$log->hora	= date("H:i:s");
+					$log->tipoLogIdTipoLog = 1;
+					$log->usuarioPersonaIdPersona = $usuario->personaIdPersona;
+					$log->usuarioPersonaDocumento = $usuario->personaDocumento;
+					$log->usuarioPersonaTipoDocumentoIdTipoDocumento = $usuario->personaTipoDocumentoIdTipoDocumento;
+					$log->usuarioTipoUsuarioIdTipoUsuario = $usuario->tipoUsuarioIdTipoUsuario;
+					//insertar el log en la bd:
+					$daoLogs->saveLog($log);
 					switch($tipoUsuario){
                     case 1:
                         return $this->redirect()->toUrl($this->getRequest()->getBaseUrl().'/technodt/usuarios/participante/'.$usuario->personaIdPersona);

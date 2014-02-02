@@ -1,8 +1,8 @@
 <?php
 namespace Technodt\Model\DAO;
 
- use Zend\Db\TableGateway\TableGateway; 
-
+use Zend\Db\TableGateway\TableGateway; 
+use Technodt\Model\Entity\Log;
  class DAOLogs
  {
      protected $tableGateway;

@@ -1,7 +1,8 @@
 <?php
 namespace Technodt\Model\DAO;
 
- use Zend\Db\TableGateway\TableGateway; 
+ use Zend\Db\TableGateway\TableGateway;
+ 
 
  class DAOUsuarios
  {
@@ -27,7 +28,17 @@ namespace Technodt\Model\DAO;
              throw new \Exception("Could not find row $id");
          }
          return $row;
-     }
+	}
+
+	/*public function getNombreUsuario()
+	{
+		$select = $this->tableGateway->getSql()->select()
+		->join('persona', 'usuario.persona_id_persona=persona.id_persona', array('nombres' => 'nombres'));
+
+		$resultSet = $this->tableGateway->selectWith($select);
+
+		return $resultSet;
+	}*/
      
      public function getUsuarioByDocumento($documento)
      {
