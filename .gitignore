@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 nbproject
 ._*
 .~lock.*
@@ -8,3 +9,10 @@ nbproject
 .settings
 composer.lock
 vendor/bin
+=======
+INSTALL.txt
+LICENSE.txt
+README.txt
+demos/
+extras/documentation
+>>>>>>> 23905c7ae5e85f736d4857c7e0b5b93a82a7dbad

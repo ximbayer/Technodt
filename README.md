@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ZendSkeletonApplication
 =======================
 
@@ -50,3 +51,9 @@ Virtual Host
 ------------
 Afterwards, set up a virtual host to point to the public/ directory of the
 project and you should be ready to go!
+=======
+Technodt
+========
+
+TP Diseño 2013
+>>>>>>> 23905c7ae5e85f736d4857c7e0b5b93a82a7dbad
