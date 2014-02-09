@@ -14,7 +14,8 @@ class LogForm extends Form
             'name' => 'tipo_documento',
             'type' => 'Zend\Form\Element\Select',
             'options' => array(
-                'label' => 'Tipo de Documento:',
+                'label' => 'Tipo de Documento: ',
+				'empty_option' => 'Seleccione...',
                 'value_options' => array(
                     '1' => 'DNI',
                     '2' => 'LE',
@@ -26,7 +27,7 @@ class LogForm extends Form
             'name' => 'documento',
             'type' => 'Text',
             'options' => array(
-                'label' => 'Documento:',
+                'label' => 'Documento: ',
             ),
         ));
         $this->add(array(

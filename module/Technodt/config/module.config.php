@@ -4,7 +4,11 @@ return array(
         'invokables' => array(
             'Technodt\Controller\Index' => 'Technodt\Controller\IndexController',
             'Technodt\Controller\Login' => 'Technodt\Controller\LoginController',
-            'Technodt\Controller\Usuarios' => 'Technodt\Controller\UsuariosController'
+            'Technodt\Controller\Usuarios' => 'Technodt\Controller\UsuariosController',
+			'Technodt\Controller\Equiposfantasia' => 'Technodt\Controller\EquiposfantasiaController',
+			'Technodt\Controller\Fechastorneo' => 'Technodt\Controller\FechastorneoController',
+			'Technodt\Controller\Futbolistas' => 'Technodt\Controller\FutbolistasController',
+			'Technodt\Controller\Calificaciones' => 'Technodt\Controller\CalificacionesController'
         ),
     ),
     
@@ -13,11 +17,12 @@ return array(
             'technodt' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/technodt[/][:controller][/:action][/:id]',
+                    'route'    => '/technodt[/][:controller][/:action][/:id][/:id2]',
                     'constraints' => array(
                         'controller'     => '[a-zA-Z][a-zA-Z0-9_-]+',
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
 						'id'     => '[0-9]+',
+						'id2'     => '[0-9]+',
                     ),
                     'defaults' => array(
                         '__NAMESPACE__' => 'Technodt\Controller',

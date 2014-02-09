@@ -1,10 +1,10 @@
 <?php
 
 namespace Technodt\Controller;
-use Zend\Mvc\Controller\AbstractActionController;
 
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Technodt\Form\Formularios;
+
 
 class UsuariosController extends AbstractActionController
 {
@@ -20,30 +20,43 @@ class UsuariosController extends AbstractActionController
          return $this->daoUsuarios;
      }
      
-    public function participanteAction()
-    {
-        $idPersona = (int) $this->params()->fromRoute('id', 0);
+	public function participanteAction()
+	{
+        //estaba antes para mostrar el email
+        /*$idPersona = (int) $this->params()->fromRoute('id', 0);
         $daoUsaurios = $this->getDAOUsuarios();
-		$usuario = $daoUsaurios ->getUsuario($idPersona);
+		$usuario = $daoUsuarios ->getUsuario($idPersona);
 		$email = $usuario->email;
-		return new ViewModel(array('email' => $email));
-    }
+		return new ViewModel(array('email' => $email));*/
+        
+        //para mostrar el/los nombres
+        $idPersona = (int) $this->params()->fromRoute('id', 0);
+        $daoUsuarios = $this->getDAOUsuarios();
+		$persona = $daoUsuarios->getNombreUsuario($idPersona);
+		$nombre = $persona->nombres;
+        $apellido = $persona->apellido;
+		return new ViewModel(array('nombres' => $nombre, "apellido" => $apellido, 'id_persona' => $idPersona));
+	}
+
+
     
     public function periodistaAction()
     {
 		$idPersona = (int) $this->params()->fromRoute('id', 0);
-        $daoUsaurios = $this->getDAOUsuarios();
-		$usuario = $daoUsaurios ->getUsuario($idPersona);
-		$email = $usuario->email;
-		return new ViewModel(array('email' => $email));
+        $daoUsuarios = $this->getDAOUsuarios();
+		$persona = $daoUsuarios->getNombreUsuario($idPersona);
+		$nombre = $persona->nombres;
+        $apellido = $persona->apellido;
+		return new ViewModel(array('nombres' => $nombre, "apellido" => $apellido,'id_persona' => $idPersona));
     }
     
     public function administradorAction()
     {
         $idPersona = (int) $this->params()->fromRoute('id', 0);
-        $daoUsaurios = $this->getDAOUsuarios();
-		$usuario = $daoUsaurios ->getUsuario($idPersona);
-		$email = $usuario->email;
-		return new ViewModel(array('email' => $email));
+        $daoUsuarios = $this->getDAOUsuarios();
+		$persona = $daoUsuarios->getNombreUsuario($idPersona);
+		$nombre = $persona->nombres;
+        $apellido = $persona->apellido;
+		return new ViewModel(array('nombres' => $nombre, "apellido" => $apellido, 'id_persona' => $idPersona));
     }
 }

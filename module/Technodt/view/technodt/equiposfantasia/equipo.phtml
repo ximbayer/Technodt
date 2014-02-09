@@ -1,0 +1,125 @@
+<div class="hero-unit">
+    <p class="pagination-right">Est&aacute logueado como: <?php echo $this->apellido.', '.$this->nombres ?> </p>
+</div>
+<div class="row">
+	<?php 
+		$formEquipoFantasia->setAttribute('action', $this->url.'/Technodt/public/technodt/equiposfantasia/equipo/'.$idPersona);
+        $formEquipoFantasia->prepare();
+		$formBuscarFutbolista->setAttribute('action', $this->url.'/Technodt/public/technodt/equiposfantasia/equipo/'.$idPersona);
+        $formBuscarFutbolista->prepare();
+		
+		echo $this->form()->openTag($formEquipoFantasia);
+	?>
+    <div class="span3">
+		<?php
+			echo $this->formRow($formEquipoFantasia->get('equipo_fantasia_nombre'));
+		?>
+		<h4>Titulares:</h4>
+        <table class="table">
+			<tr>
+				<th>Posici&oacute;n</th><th>Apellido y Nombres</th>
+			</tr>
+				<td>ARQ</td><td></td>
+			<tr>
+				<td>DEF</td><td></td>
+			</tr>
+			<tr>
+				<td>DEF</td><td></td>
+			</tr>
+			<tr>
+				<td>DEF</td><td></td>
+			</tr>
+			<tr>
+				<td>DEF</td><td></td>
+			</tr>
+			<tr>
+				<td>VOL</td><td></td>
+			</tr>
+			<tr>
+				<td>VOL</td><td></td>
+			</tr>
+			<tr>
+				<td>VOL</td><td></td>
+			</tr>
+			<tr>
+				<td>DEL</td><td></td>
+			</tr>
+			<tr>
+				<td>DEL</td><td></td>
+			</tr>
+			<tr>
+				<td>DEL</td><td></td>
+			</tr>
+		</table>
+		<h4>Suplentes:</h4>
+        <table class="table">
+			<tr>
+				<th>Posici&oacute;n</th><th>Apellido y Nombres</th>
+			</tr>
+			<tr>
+				<td>ARQ</td><td></td>
+			</tr>
+			<tr>
+				<td>DEF</td><td></td>
+			</tr>
+			<tr>
+				<td>VOL</td><td></td>
+			</tr>
+			<tr>
+				<td>DEL</td><td></td>
+			</tr>
+		</table>
+		<div class="pagination-right">
+			<div class="btn btn-danger">Cancelar</div>
+			<?php 
+				echo $this->formSubmit($formEquipoFantasia->get('guardar'));
+			?>
+		</div>
+    </div>
+    <div class="span5">
+		<table class="table">
+			<tr>
+				<th>Llevas Gastado</th>
+				<th>Puedes Gastar</th>
+			</tr>
+			<tr>
+				<td>$ 30000000</td>
+				<td>$ 50000000</td>
+			</tr>
+		</table>
+		<?php echo $this->form()->openTag($formBuscarFutbolista); ?>
+		<table class="table">
+			<tr>
+				<td></td>
+				<td><div style="margin-left:0px;margin-top:40px"><?php echo $this->formSubmit($formBuscarFutbolista->get('buscar'));?></div></td>
+				<td><h5>Equipos de Primera</h5><?php echo $this->formSelect($formBuscarFutbolista->get('club')) ?></td>
+				<td><h5>Posici&oacute;n</h5><?php echo $this->formSelect($formBuscarFutbolista->get('posicion')) ?></td>
+				<td><h5>Cotizaci&oacute;n Desde - Hasta:</h5><?php echo $this->formSelect($formBuscarFutbolista->get('cotizacionDesde')).$this->formSelect($formBuscarFutbolista->get('cotizacionHasta'));?> </td>
+			</tr>
+			<tr>
+				<th>Agregar</th>
+				<th>Apellido y Nombres</th>
+				<th>Equipo</th>
+				<th>Posici&oacute;n</th>
+				<th>Cotizaci&oacute;n</th>
+			</tr>
+			<?php foreach ($futbolistas as $futbolista) : ?>
+			<tr>
+				<td>
+					<a class="btn btn-success" href="<?php echo $this->basePath()?>/technodt/equiposfantasia/agregarjugador/<?php echo $idPersona.'/'.$futbolista->idFutbolista ?>"  target="_parent"><-</a>
+				</td>
+				<td><?php echo $this->escapeHtml($futbolista->apellido).', '.$this->escapeHtml($futbolista->nombres); ?></td>
+				<td><?php echo $this->escapeHtml($this->daoFutbolistas->getClubFutbolista($futbolista->clubIdClub)->nombre);?></td>
+				<td><?php echo $this->escapeHtml($this->daoFutbolistas->getPosicionFutbolista($futbolista->posicionIdPosicion)->posicion);?></td>
+				<td><?php echo $this->escapeHtml($futbolista->cotizacion);?></td>
+			</tr>
+			<?php endforeach; ?>
+		</table>
+		<?php echo $this->form()->closeTag($formBuscarFutbolista); ?>
+    </div>
+</div>
+<div>
+		<?php 
+			echo $this->form()->closeTag($formEquipoFantasia);
+		?>
+</div>

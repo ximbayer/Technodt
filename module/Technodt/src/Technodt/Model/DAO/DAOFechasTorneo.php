@@ -2,8 +2,12 @@
 namespace Technodt\Model\DAO;
 
  use Zend\Db\TableGateway\TableGateway; 
+ use Zend\Db\TableGateway\AbstractTableGateway;
+ use Zend\Db\TableGateway\Feature; 
+ use Zend\Db\Sql\Sql;
+ use Zend\Db\Adapter\Adapter;
 
- class DAOUsuarios
+ class DAOFechasTorneo
  {
      protected $tableGateway;
 
@@ -18,7 +22,7 @@ namespace Technodt\Model\DAO;
          return $resultSet;
      }
 
-     public function getUsuario($id)
+     public function getFechasTorneo($id)
      {
          $id  = (int) $id;
          $rowset = $this->tableGateway->select(array('id_fecha_torneo' => $id));
@@ -28,6 +32,27 @@ namespace Technodt\Model\DAO;
          }
          return $row;
      }
+     
+     public function getPartidosxFecha($id)
+	{
+	/*$select = $this->tableGateway->getSql()->select()
+		                  ->join('persona', 'usuario.persona_id_persona=persona.id_persona')
+                          ->where('usuario.persona_id_persona = ?', $id);*/
+        
+        $adapter=$this->tableGateway->getAdapter();
+        $tablePersona = new TableGateway('partido', $adapter, new Feature\RowGatewayFeature('fecha_torneo_id_fecha_torneo'));
+        $results = $tablePersona->select(array('fecha_torneo_id_fecha_torneo' => $id));
+        return $results;
+	}
+    
+    /*public function getClubPartido($idClubLocal, $idClubVisita) 
+	{
+        $adapter=$this->tableGateway->getAdapter();
+        $tableClub = new TableGateway('club', $adapter, new Feature\RowGatewayFeature('id_club'));
+        $results = $tableClub->select(array('id_club' => $idClub));
+        $club = $results->current();
+        return $club;
+	}*/
 
      public function saveFechaTorneo(FechaTorneo $fechaTorneo)
      {
@@ -43,7 +68,7 @@ namespace Technodt\Model\DAO;
          if ($id == 0) {
              $this->tableGateway->insert($data);
          } else {
-             if ($this->getFechaTorneo($id)) {
+             if ($this->getFechasTorneo($id)) {
                  $this->tableGateway->update($data, array('id_fecha_torneo' => $id));
              } else {
                  throw new \Exception('FechaTorneo id does not exist');
@@ -51,7 +76,7 @@ namespace Technodt\Model\DAO;
          }
      }
 
-     public function deleteFehaTorneo($id)
+     public function deleteFechaTorneo($id)
      {
          $this->tableGateway->delete(array('id_fecha_torneo' => (int) $id));
      }

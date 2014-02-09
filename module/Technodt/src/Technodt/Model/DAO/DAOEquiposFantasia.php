@@ -1,8 +1,12 @@
 <?php
 namespace Technodt\Model\DAO;
 
- use Zend\Db\TableGateway\TableGateway; 
-
+ use Zend\Db\TableGateway\TableGateway;
+ use Zend\Db\TableGateway\AbstractTableGateway;
+ use Zend\Db\TableGateway\Feature; 
+ use Zend\Db\Sql\Sql;
+ use Zend\Db\Adapter\Adapter;
+ 
  class DAOEquiposFantasia
  {
      protected $tableGateway;
@@ -26,6 +30,15 @@ namespace Technodt\Model\DAO;
          if (!$row) {
              throw new \Exception("Could not find row $id");
          }
+         return $row;
+	}
+
+	public function getEquipoFantasiaByPersona($idPersona)
+     {
+         $idPersona  = (int) $idPersona;
+         $rowset = $this->tableGateway->select(array('usuario_persona_id_persona' => $idPersona));
+         $row = $rowset->current();
+         
          return $row;
      }
 
@@ -53,7 +66,7 @@ namespace Technodt\Model\DAO;
          }
      }
 
-     public function deleteLog($id)
+     public function deleteEquipoFantasia($id)
      {
          $this->tableGateway->delete(array('id_equipo_fantasia' => (int) $id));
      }

@@ -1,0 +1,48 @@
+<div class="hero-unit">
+    <p class="pagination-right">Est&aacute logueado como: <?php echo $this->apellido.', '.$this->nombres ?> </p>
+</div>
+<div class="row">
+	<?php 
+		$form->setAttribute('action', $this->url.'/Technodt/public/technodt/calificaciones/gestionarfecha');
+        $form->prepare();
+		echo $this->form()->openTag($form);
+	?>
+    <div class="span4">
+		<h4 align="center">Fechas del Torneo Argentino</h4>
+        <table class="table">
+			<tr>
+				<th><h6> 
+                
+                <table align="center">
+  <?php foreach ($fechastorneo as $dato) : ?>
+<tr>
+    <td>Fecha No: <?php echo $this->escapeHtml($dato->idFechaTorneo);?></td>
+    <td>
+        <a href="<?php echo $this->basePath()?>/technodt/calificaciones/obtenerequipos/<?php echo $this->id_persona ?>/<?php echo $dato->idFechaTorneo?>">Edit</a>         
+    </td>
+</tr>
+<?php endforeach; ?>
+                </table>            
+                </h6></th>
+			</tr>	
+		</table>
+		    </div>
+    <div class="span8">
+		<h4 align="center">Partidos del Torneo Argentino</h4>
+		<table class="table">
+			<tr>
+				<th><h6> 
+                  
+                </h6></th>
+			</tr>
+		</table>
+		
+    </div>
+</div>
+<div class="pagination-right">
+		<div class="btn btn-danger">Atras</div>
+		<?php 
+			echo $this->formSubmit($form->get('verdetalle'));
+			echo $this->form()->closeTag();
+		?>
+</div>

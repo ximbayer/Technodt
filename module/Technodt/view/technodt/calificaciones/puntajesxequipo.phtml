@@ -1,0 +1,90 @@
+<div class="hero-unit">
+    <p class="pagination-right">Est&aacute logueado como: <?php echo $this->apellido.', '.$this->nombres ?> </p>
+</div>
+<?php
+$form = $this->form;
+$form->prepare();
+
+$form->setAttributes(array(
+    'action' => $this->url.'/Technodt/public/technodt/calificaciones/puntajesxequipo',
+    'method' => 'post'
+));
+
+// Get the form label plugin
+$formLabel = $this->plugin('formLabel');
+
+// Render the opening tag
+echo $this->form()->openTag($form);
+?>
+<div class="form_element">
+<?php
+    /*$name = $form->get('nombre');
+    echo $formLabel->openTag().$name->getOption('label')." ";
+    echo $formLabel->closeTag();
+    echo $this->formInput($name);*/
+?>  <hr /><th>
+    <div class="form_element">
+    <?php
+    $puntaje = $form->get('puntaje');
+    echo $formLabel->openTag() . $puntaje->getLabel();
+    echo $formLabel->closeTag();
+    echo $this->formSelect($puntaje);
+    echo $this->formElementErrors($puntaje);
+    ?></div></th>
+    <hr />
+    <th>
+    <div class="form_element">
+    <?php
+    $condiciones = $form->get('condiciones');
+    echo $formLabel->openTag() . $condiciones->getLabel();
+    echo $formLabel->closeTag();
+    echo $this->formCheckbox($condiciones);
+    echo $this->formElementErrors($condiciones);
+    ?></div></th>
+    <hr />
+    <th>
+    <div class="form_element">
+    <?php
+    $amarilla = $form->get('amarillas');
+    echo $formLabel->openTag() . $amarilla->getLabel();
+    echo $formLabel->closeTag();
+    echo $this->formCheckbox($amarilla);
+    echo $this->formElementErrors($amarilla);
+    ?></div></th>
+    <hr />
+    <div class="form_element">
+    <?php
+    $roja = $form->get('rojas');
+    echo $formLabel->openTag() . $roja->getLabel();
+    echo $formLabel->closeTag();
+    echo $this->formCheckbox($roja);
+    echo $this->formElementErrors($roja);
+    ?></div>
+    <hr />
+    <div class="form_element">
+    <?php
+    $golesConv = $form->get('golesConv');
+    echo $formLabel->openTag() . $golesConv->getLabel();
+    echo $formLabel->closeTag();
+    echo $this->formSelect($golesConv);
+    echo $this->formElementErrors($golesConv);
+    ?></div>
+    <hr />
+    <?php
+    $figura = $form->get('figura');
+    echo $formLabel->openTag().$figura->getOption('label')." ";
+    echo $formLabel->closeTag();
+    echo $this->formInput($figura);
+    ?>
+    <hr />
+    <div class="form_element">
+    <?php
+    $penalesConv = $form->get('penalesConv');
+    echo $formLabel->openTag() . $penalesConv->getLabel();
+    echo $formLabel->closeTag();
+    echo $this->formSelect($penalesConv);
+    echo $this->formElementErrors($penalesConv);
+    ?></div>
+    <hr />
+<?php echo $this->formElement($form->get('guardar')) ?>
+<?php echo $this->form()->closeTag() ?>

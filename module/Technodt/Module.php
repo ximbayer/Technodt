@@ -96,7 +96,7 @@ class Module
                  'FutbolistasTableGateway' => function ($sm) {
                      $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                      $resultSetPrototype = new ResultSet();
-                     $resultSetPrototype->setArrayObjectPrototype(new FechaTorneo());
+                     $resultSetPrototype->setArrayObjectPrototype(new Futbolista());
                      return new TableGateway('futbolista', $dbAdapter, null, $resultSetPrototype);
                  },
                  'Technodt\Model\DAO\DAOLogs' =>  function($sm) {

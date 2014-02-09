@@ -2,14 +2,16 @@
 
 namespace Technodt\Form;
 
-use Zend\Form\Element;
 use Zend\Form\Form;
+use Technodt\Controller\EquiposFantasiaController;
 
 class EquipoFantasiaForm extends Form
 {
+	protected $daoFutbolistas;
+	
     public function __construct($name = null)
     {
-        parent::__construct('equipo');
+        parent::__construct('equipo_fantasia');
         
         //Texto para el nombre de usuario
         $this->add(array(
@@ -19,8 +21,17 @@ class EquipoFantasiaForm extends Form
                 'class' => 'output'
             ),
         ));
+		
+		//Campo para el Nombre del Equipo Fantasia
+		$this->add(array(
+            'name' => 'equipo_fantasia_nombre',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Nombre del Equipo: ',
+            ),
+        ));
         
-        //Texto para el nombre del equipo fantasia
+        //Texto para el nombre del equipo fantasia Ya Creado
         $this->add(array(
             'name' => 'nombreEquipo',
             'options' => array(
@@ -28,29 +39,12 @@ class EquipoFantasiaForm extends Form
             ),
             'attributes' => array(
                 'type' => 'text',
-                'class' => 'input'
+                'class' => 'output'
             ),
         ));
         
-        //SELECTS PARA CLUB, POSICION, COTIZACION
-    
-        $club = new Element\Select('club');
-        $club->setLabel('Club: ');
-        $club->setEmptyOption('Todos');
-        $club->setValueOptions(array());
-        $club->add($club);
-     
-        $pos = new Element\Select('posicion');
-        $pos->setLabel('Posicion: ');
-        $pos->setEmptyOption('Todos');
-        $pos->setValueOptions(array(
-                            'options' => array(
-                                    '0' => 'Arquero',
-                                    '1' => 'Defensor',
-                                    '2' => 'Mediocampista',
-                                    '3' => 'Delantero')));
-        $pos->add($pos);
-     
+        
+     /*
         $cot = new Element\Select('cotizacionDesde');
         $cot->setLabel('Cotizacion desde: ');
         $cot->setEmptyOption('Seleccione...');
@@ -69,69 +63,69 @@ class EquipoFantasiaForm extends Form
         $club->setLabel('Pagina: ');
         $club->setEmptyOption('1');
         $club->setValueOptions(array());
-        $club->add($club);
+        $club->add($club);*/
      
-        //botones para guardar y cancelar
+        //boton para guardar
      
         $this->add(array(
             'name' => 'guardar',
             'attributes' => array(
-                'value' => 'Guardar',
+                'value' => 'Guardar Equipo',
                 'title' => 'Guardar',
                 'type' => 'Submit'
             ),
         ));
-        
-        $this->add(array(
-            'name' => 'cancelar',
+		
+		$this->add(array(
+            'name' => 'buscar',
             'attributes' => array(
-                'value' => 'Cancelar',
-                'title' => 'Cancelar',
-                'type' => 'button'
+                'value' => '      Buscar Jugadores      ',
+                'title' => 'Buscar',
+                'type' => 'Submits'
+            ),
+        ));
+		
+		//Botón Poner
+		$this->add(array(
+            'name' => 'poner',
+            'attributes' => array(
+                'value' => 'Poner',
+                'title' => 'Poner',
+                'type' => 'Submit'
+            ),
+        ));
+		
+		//Botón Sacar
+		$this->add(array(
+            'name' => 'sacar',
+            'attributes' => array(
+                'value' => 'Sacar',
+                'title' => 'Sacar',
+                'type' => 'Submit'
             ),
         ));
         
-        //boton para realizar los cambios
-        
-        $this->add(array(
-            'name' => 'cambios',
+        //Botón Cambiar
+		$this->add(array(
+            'name' => 'cambiar',
             'attributes' => array(
-                'value' => 'Realizar Cambios',  //aca podemos no poner nada y poner una foto con alguna flecha circular
-                'title' => 'Cambios',
-                'type' => 'button'
+                'value' => 'Cambiar',
+                'title' => 'Cambiar',
+                'type' => 'Submit'
             ),
         ));
         
-        //ingresar y eliminar jugadores del equipo
-        //no se si van aca, o directamente al HTML para agregarle una imagen
-        $this->add(array(
-            'name' => 'ingresar',
-            'attributes' => array(
-                'value' => 'Ingresar',  //aca podemos no poner nada y poner una foto con alguna flecha
-                'title' => 'Ingresar',
-                'type' => 'button'
-            ),
-        ));
+	}
+	
+	public function getDAOFutbolistas()
+     {
         
-        $this->add(array(
-            'name' => 'eliminar',
-            'attributes' => array(
-                'value' => 'Eliminar',  //aca podemos no poner nada y poner una foto con alguna flecha
-                'title' => 'Eliminar',
-                'type' => 'button'
-            ),
-        ));
-        
-        //desloguearse
-        
-        $this->add(array(
-            'name' => 'deslog',
-            'attributes' => array(
-                'value' => 'Desloquearse',  //podriamos poner una foto de un boton de power
-                'title' => 'Desloquearse',
-                'type' => 'button'
-            ),
-        ));
-        
-    }
+         if (!$this->daoFutbolistas) {
+             $sm = $this->getServiceLocator();
+             $this->daoFutbolistas = $sm->get('Technodt\Model\DAO\DAOFutbolistas');
+         }
+         return $this->daoFutbolistas;
+	}
+
+	
 }

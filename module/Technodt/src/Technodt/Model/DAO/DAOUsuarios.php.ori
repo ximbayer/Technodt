@@ -2,10 +2,7 @@
 namespace Technodt\Model\DAO;
 
  use Zend\Db\TableGateway\TableGateway;
- use Zend\Db\TableGateway\AbstractTableGateway;
- use Zend\Db\TableGateway\Feature; 
- use Zend\Db\Sql\Sql;
- use Zend\Db\Adapter\Adapter;
+ 
 
  class DAOUsuarios
  {
@@ -33,18 +30,15 @@ namespace Technodt\Model\DAO;
          return $row;
 	}
 
-	public function getNombreUsuario($id)
+	/*public function getNombreUsuario()
 	{
-	/*$select = $this->tableGateway->getSql()->select()
-		                  ->join('persona', 'usuario.persona_id_persona=persona.id_persona')
-                          ->where('usuario.persona_id_persona = ?', $id);*/
-        
-        $adapter=$this->tableGateway->getAdapter();
-        $tablePersona = new TableGateway('persona', $adapter, new Feature\RowGatewayFeature('id_persona'));
-        $results = $tablePersona->select(array('id_persona' => $id));
-        $persona = $results->current();
-        return $persona;
-	}
+		$select = $this->tableGateway->getSql()->select()
+		->join('persona', 'usuario.persona_id_persona=persona.id_persona');/*, array('nombres' => 'nombres'));*/
+
+		/*$resultSet = $this->tableGateway->selectWith($select);
+
+		return $resultSet;
+	}*/
      
      public function getUsuarioByDocumento($documento)
      {
